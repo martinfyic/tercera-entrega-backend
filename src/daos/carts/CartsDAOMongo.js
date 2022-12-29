@@ -1,7 +1,7 @@
-const cartsModel = require('../../schemas/cartsSchema');
-const productsModel = require('../../schemas/productsSchema');
+import cartsModel from '../../schemas/cartsSchema.js';
+import productsModel from '../../schemas/productsSchema.js';
 
-const createCart = async newCart => {
+export const createCart = async newCart => {
 	const cartGenerated = new cartsModel({
 		_id: newCart.cartId,
 		products: newCart.products,
@@ -15,12 +15,12 @@ const createCart = async newCart => {
 	};
 };
 
-const getAllCarts = async () => {
+export const getAllCarts = async () => {
 	const allCarts = await cartsModel.find({});
 	return allCarts;
 };
 
-const deletCart = async cartId => {
+export const deletCart = async cartId => {
 	const searchForDelete = await cartsModel.findByIdAndDelete(cartId);
 	if (searchForDelete === null)
 		return {
@@ -34,7 +34,7 @@ const deletCart = async cartId => {
 	};
 };
 
-const cartProductById = async cartId => {
+export const cartProductById = async cartId => {
 	const indexForCartProduct = await cartsModel.findById(cartId);
 	if (indexForCartProduct === null)
 		return {
@@ -45,7 +45,7 @@ const cartProductById = async cartId => {
 	return indexForCartProduct;
 };
 
-const searchProd = async prodId => {
+export const searchProd = async prodId => {
 	const prodSelected = await productsModel.findById(prodId);
 	if (prodSelected === null)
 		return {
@@ -55,7 +55,7 @@ const searchProd = async prodId => {
 	return prodSelected;
 };
 
-const addProductToCart = async (cartId, prodSelectedById) => {
+export const addProductToCart = async (cartId, prodSelectedById) => {
 	if (prodSelectedById?.status === 'Error') return prodSelectedById;
 
 	const cartProduct = await cartsModel.findById(cartId);
@@ -106,7 +106,7 @@ const addProductToCart = async (cartId, prodSelectedById) => {
 	}
 };
 
-const deleteProductInCart = async (cartId, prodId) => {
+export const deleteProductInCart = async (cartId, prodId) => {
 	const cartProduct = await cartsModel.findById(cartId);
 	if (cartProduct === null)
 		return {
@@ -149,14 +149,4 @@ const deleteProductInCart = async (cartId, prodId) => {
 			data: cartProduct,
 		};
 	}
-};
-
-module.exports = {
-	createCart,
-	getAllCarts,
-	deletCart,
-	cartProductById,
-	searchProd,
-	addProductToCart,
-	deleteProductInCart,
 };

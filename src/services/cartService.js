@@ -1,7 +1,7 @@
-const { v4: uuidv4 } = require('uuid');
-const Cart = require('../daos/carts/CartsDAOMongo');
+import { v4 as uuidv4 } from 'uuid';
+import * as Cart from '../daos/carts/CartsDAOMongo.js';
 
-const createCart = async () => {
+export const createCart = async () => {
 	const newCart = {
 		cartId: uuidv4(),
 		products: [],
@@ -12,22 +12,22 @@ const createCart = async () => {
 	return cartGenerated;
 };
 
-const getAllCarts = async () => {
+export const getAllCarts = async () => {
 	const allCarts = await Cart.getAllCarts();
 	return allCarts;
 };
 
-const deletCart = async cartId => {
+export const deletCart = async cartId => {
 	const cartDeleted = await Cart.deletCart(cartId);
 	return cartDeleted;
 };
 
-const cartProductById = async cartId => {
+export const cartProductById = async cartId => {
 	const productInCart = await Cart.cartProductById(cartId);
 	return productInCart;
 };
 
-const addProductToCart = async (cartId, prodId) => {
+export const addProductToCart = async (cartId, prodId) => {
 	const prodSelectedById = await Cart.searchProd(prodId);
 	const productAddedToCart = await Cart.addProductToCart(
 		cartId,
@@ -36,16 +36,7 @@ const addProductToCart = async (cartId, prodId) => {
 	return productAddedToCart;
 };
 
-const deleteProductInCart = async (cartId, prodId) => {
+export const deleteProductInCart = async (cartId, prodId) => {
 	const prodDeleted = await Cart.deleteProductInCart(cartId, prodId);
 	return prodDeleted;
-};
-
-module.exports = {
-	createCart,
-	getAllCarts,
-	deletCart,
-	cartProductById,
-	addProductToCart,
-	deleteProductInCart,
 };

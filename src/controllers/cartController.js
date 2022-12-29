@@ -1,16 +1,16 @@
-const cartService = require('../services/cartService');
+import * as cartService from '../services/cartService.js';
 
-const createCart = async (req, res) => {
+export const createCart = async (req, res) => {
 	const newCart = await cartService.createCart();
 	res.status(201).send(newCart);
 };
 
-const getAllCarts = async (req, res) => {
+export const getAllCarts = async (req, res) => {
 	const allCarts = await cartService.getAllCarts();
 	res.send(allCarts);
 };
 
-const deletCart = async (req, res) => {
+export const deletCart = async (req, res) => {
 	const { cartId } = req.params;
 	if (!cartId) return;
 
@@ -18,20 +18,20 @@ const deletCart = async (req, res) => {
 	res.status(200).send(cartDeleted);
 };
 
-const cartProductById = async (req, res) => {
+export const cartProductById = async (req, res) => {
 	const { cartId } = req.params;
 	const productsInCartId = await cartService.cartProductById(cartId);
 	res.status(200).send({ status: 'ok', data: productsInCartId });
 };
 
-const addProductToCart = async (req, res) => {
+export const addProductToCart = async (req, res) => {
 	const { cartId } = req.params;
 	const { body } = req;
 	const saveProdInCart = await cartService.addProductToCart(cartId, body);
 	res.status(201).send(saveProdInCart);
 };
 
-const deleteProductInCart = async (req, res) => {
+export const deleteProductInCart = async (req, res) => {
 	const { cartId, prodId } = req.params;
 	const deletedProd = await cartService.deleteProductInCart(cartId, prodId);
 	res.send({
@@ -39,13 +39,4 @@ const deleteProductInCart = async (req, res) => {
 		message: `Producto id: ${prodId} eliminado`,
 		data: deletedProd,
 	});
-};
-
-module.exports = {
-	createCart,
-	getAllCarts,
-	deletCart,
-	cartProductById,
-	addProductToCart,
-	deleteProductInCart,
 };

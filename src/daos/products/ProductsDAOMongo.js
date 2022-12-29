@@ -1,11 +1,11 @@
-const productsModel = require('../../schemas/productsSchema');
+import productsModel from '../../schemas/productsSchema.js';
 
-const getAllProducts = async () => {
+export const getAllProducts = async () => {
 	const allProducts = await productsModel.find({});
 	return allProducts;
 };
 
-const getProductById = async prodId => {
+export const getProductById = async prodId => {
 	const productById = await productsModel.findById(prodId).exec();
 	if (productById === null)
 		return {
@@ -15,7 +15,7 @@ const getProductById = async prodId => {
 	return productById;
 };
 
-const createNewProduct = async newProduct => {
+export const createNewProduct = async newProduct => {
 	let isAlreadyAdded = await productsModel
 		.findOne({ title: newProduct.title })
 		.exec();
@@ -40,7 +40,7 @@ const createNewProduct = async newProduct => {
 	};
 };
 
-const upDatedProduct = async (prodId, bodyUpdate) => {
+export const upDatedProduct = async (prodId, bodyUpdate) => {
 	let productUpdateExist = await productsModel.findById(prodId).exec();
 	if (productUpdateExist === null)
 		return { message: `Producto Id: ${prodId} no encontrado` };
@@ -58,7 +58,7 @@ const upDatedProduct = async (prodId, bodyUpdate) => {
 	};
 };
 
-const deleteOneProduct = async prodId => {
+export const deleteOneProduct = async prodId => {
 	let productUpdateExist = await productsModel.findById(prodId).exec();
 	if (productUpdateExist === null) {
 		return { message: `Producto Id: ${prodId} no encontrado` };
@@ -66,12 +66,4 @@ const deleteOneProduct = async prodId => {
 
 	await productsModel.findByIdAndDelete(prodId);
 	return { message: `Producto Id: ${prodId} eliminado` };
-};
-
-module.exports = {
-	getAllProducts,
-	getProductById,
-	createNewProduct,
-	upDatedProduct,
-	deleteOneProduct,
 };

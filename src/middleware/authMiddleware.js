@@ -1,4 +1,4 @@
-const userRole = (req, res, next) => {
+export const userRole = (req, res, next) => {
 	if (!req.headers.authorization) {
 		return res.status(403).send({
 			status: 'Error',
@@ -8,8 +8,4 @@ const userRole = (req, res, next) => {
 	}
 
 	next();
-};
-
-module.exports = {
-	userRole,
 };

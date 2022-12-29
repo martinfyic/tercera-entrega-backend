@@ -1,17 +1,17 @@
-const productService = require('../services/productService');
+import * as productService from '../services/productService.js';
 
-const getAllProducts = async (req, res) => {
+export const getAllProducts = async (req, res) => {
 	const allProducts = await productService.getAllProducts();
 	res.status(200).send({ status: 'OK', data: allProducts });
 };
 
-const getProductById = async (req, res) => {
+export const getProductById = async (req, res) => {
 	const { prodId } = req.params;
 	const productById = await productService.getProductById(prodId);
 	res.status(200).send({ status: 'OK', data: productById });
 };
 
-const createNewProduct = async (req, res) => {
+export const createNewProduct = async (req, res) => {
 	const { body } = req;
 
 	const newProduct = {
@@ -40,7 +40,7 @@ const createNewProduct = async (req, res) => {
 	}
 };
 
-const upDateOneProduct = async (req, res) => {
+export const upDateOneProduct = async (req, res) => {
 	const { prodId } = req.params;
 	const { body } = req;
 	if (!prodId) return;
@@ -49,17 +49,9 @@ const upDateOneProduct = async (req, res) => {
 	res.send({ status: 'ok', data: updatedProduct });
 };
 
-const deleteOneProduct = async (req, res) => {
+export const deleteOneProduct = async (req, res) => {
 	const { prodId } = req.params;
 	if (!prodId) return;
 	const prodDeleted = await productService.deleteOneProduct(prodId);
 	res.status(200).send(prodDeleted);
-};
-
-module.exports = {
-	getAllProducts,
-	getProductById,
-	createNewProduct,
-	upDateOneProduct,
-	deleteOneProduct,
 };

@@ -1,10 +1,10 @@
-const dotenv = require('dotenv');
-dotenv.config();
-const express = require('express');
-const v1ProdRouter = require('./routes/v1/productsRoutes');
-const v1CartRouter = require('./routes/v1/cartRoutes');
-const error404 = require('./middleware/error404');
-const { dbConnect } = require('./config/MongoConnect');
+console.clear();
+import 'dotenv/config';
+import express from 'express';
+import v1ProdRouter from './routes/v1/productsRoutes.js';
+import v1CartRouter from './routes/v1/cartRoutes.js';
+import error404 from './middleware/error404.js';
+import dbConnect from './config/MongoConnect.js';
 
 const PORT = process.env.PORT || 8080;
 
@@ -25,7 +25,7 @@ const connection = async () => {
 		);
 	});
 	serverOn.on('error', err => {
-		console.log(`⚠️ Error en el servidor ===> ${err}`);
+		console.log(`⚠️ Error en el servidor ===> ${err?.message}`);
 	});
 };
 

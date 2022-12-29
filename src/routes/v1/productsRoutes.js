@@ -1,10 +1,10 @@
-const express = require('express');
-const authMiddleware = require('../../middleware/authMiddleware');
-const productController = require('../../controllers/productController');
+import express from 'express';
+import * as authMiddleware from '../../middleware/authMiddleware.js';
+import * as productController from '../../controllers/productController.js';
 
-const prodRouter = express.Router();
+const v1ProdRouter = express.Router();
 
-prodRouter
+v1ProdRouter
 	.get('/', productController.getAllProducts)
 	.get('/:prodId', productController.getProductById)
 	.post('/', authMiddleware.userRole, productController.createNewProduct)
@@ -15,4 +15,4 @@ prodRouter
 		productController.deleteOneProduct
 	);
 
-module.exports = prodRouter;
+export default v1ProdRouter;

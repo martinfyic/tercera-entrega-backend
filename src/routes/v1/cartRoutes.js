@@ -1,9 +1,9 @@
-const express = require('express');
-const cartController = require('../../controllers/cartController');
+import express from 'express';
+import * as cartController from '../../controllers/cartController.js';
 
-const cartRouter = express.Router();
+const v1CartRouter = express.Router();
 
-cartRouter
+v1CartRouter
 	.post('/', cartController.createCart)
 	.delete('/:cartId', cartController.deletCart)
 	.get('/:cartId/productos', cartController.cartProductById)
@@ -11,4 +11,4 @@ cartRouter
 	.post('/:cartId/productos', cartController.addProductToCart)
 	.delete('/:cartId/productos/:prodId', cartController.deleteProductInCart);
 
-module.exports = cartRouter;
+export default v1CartRouter;
