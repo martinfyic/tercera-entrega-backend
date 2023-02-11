@@ -15,9 +15,16 @@ export const createCart = async newCart => {
 	};
 };
 
-export const getAllCarts = async () => {
-	const allCarts = await cartsModel.find({});
-	return allCarts;
+export const getAllCarts = async (limit = 10, since = 0) => {
+	const allCarts = await cartsModel
+		.find({})
+		.limit(Number(limit))
+		.skip(Number(since));
+	const totalCarts = await cartsModel.countDocuments({});
+	return {
+		totalCarts,
+		allCarts,
+	};
 };
 
 export const deletCart = async cartId => {

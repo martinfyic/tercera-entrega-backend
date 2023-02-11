@@ -12,8 +12,8 @@ export const createCart = async () => {
 	return cartGenerated;
 };
 
-export const getAllCarts = async () => {
-	const allCarts = await Cart.getAllCarts();
+export const getAllCarts = async (limit, since) => {
+	const allCarts = await Cart.getAllCarts(limit, since);
 	return allCarts;
 };
 
