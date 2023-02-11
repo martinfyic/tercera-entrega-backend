@@ -1,7 +1,9 @@
 import * as productService from '../services/productService.js';
 
 export const getAllProducts = async (req, res) => {
-	const allProducts = await productService.getAllProducts();
+	const { limit, since } = req.query;
+
+	const allProducts = await productService.getAllProducts(limit, since);
 	res.status(200).send({ status: 'OK', data: allProducts });
 };
 

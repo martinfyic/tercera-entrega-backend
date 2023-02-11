@@ -1,8 +1,15 @@
 import productsModel from '../../schemas/productsSchema.js';
 
-export const getAllProducts = async () => {
-	const allProducts = await productsModel.find({});
-	return allProducts;
+export const getAllProducts = async (limit = 10, since = 0) => {
+	const allProducts = await productsModel
+		.find({})
+		.limit(Number(limit))
+		.skip(Number(since));
+	const totalProducts = await productsModel.countDocuments({});
+	return {
+		totalProducts,
+		allProducts,
+	};
 };
 
 export const getProductById = async prodId => {
