@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import * as Products from '../daos/products/ProductsDAOMongo.js';
 
-export const getAllProducts = async () => {
-	const allProducts = await Products.getAllProducts();
+export const getAllProducts = async (limit, since) => {
+	const allProducts = await Products.getAllProducts(limit, since);
 	return allProducts;
 };
 
