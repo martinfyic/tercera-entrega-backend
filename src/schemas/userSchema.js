@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const addressSchema = new Schema({
 	street: {
@@ -41,9 +42,7 @@ const userSchema = Schema(
 			type: String,
 			required: true,
 		},
-		img: {
-			type: String,
-		},
+		avatar: String,
 		phone: {
 			type: Number,
 			required: true,
@@ -59,6 +58,17 @@ const userSchema = Schema(
 	},
 	{ timestamps: true, versionKey: false }
 );
+
+userSchema.pre('save', async function (next) {
+	try {
+		const user = this;
+		const hash = await bcrypt.hash(user.password, 10);
+		user.password = hash;
+		next();
+	} catch (error) {
+		next(error);
+	}
+});
 
 const userModel = model('users', userSchema);
 
