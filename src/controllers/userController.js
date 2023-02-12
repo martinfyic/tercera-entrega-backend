@@ -54,9 +54,36 @@ export const createNewUser = async (req, res) => {
 	} else {
 		try {
 			await userService.createNewUser(newUser);
-			res.redirect('users/login');
+			res.redirect('/users/login');
 		} catch (error) {
 			throw error;
 		}
 	}
+};
+
+export const singUpUser = (req, res) => {
+	if (req.isAuthenticated()) return res.redirect('/users/menu');
+	res.render('signup');
+};
+
+export const loginUser = (req, res) => {
+	if (req.isAuthenticated()) return res.redirect('/users/menu');
+	res.render('login');
+};
+
+export const userMenu = (req, res) => {
+	const user = req.user;
+	res.status(200).render('userMenu', { user });
+};
+
+export const userLogOut = (req, res) => {
+	req.logout(err => {
+		if (err) return err;
+		res.redirect('/users/login');
+	});
+};
+
+export const loginError = (req, res) => {
+	if (req.isAuthenticated()) return res.redirect('/users/menu');
+	res.render('error-login');
 };
