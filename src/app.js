@@ -1,8 +1,8 @@
-console.clear();
 import 'dotenv/config';
 import express from 'express';
 import v1ProdRouter from './routes/v1/productsRoutes.js';
 import v1CartRouter from './routes/v1/cartRoutes.js';
+import v1UserRouter from './routes/v1/userRoutes.js';
 import error404 from './middleware/error404.js';
 import dbConnect from './config/MongoConnect.js';
 
@@ -13,6 +13,10 @@ const app = express();
 app
 	.use(express.json())
 	.use(express.urlencoded({ extended: true }))
+	.use(express.static('./src/views'))
+	.set('view engine', 'ejs')
+	.set('views', './src/views')
+	.use('/users', v1UserRouter)
 	.use('/api/v1/productos', v1ProdRouter)
 	.use('/api/v1/carrito', v1CartRouter)
 	.use(error404);
