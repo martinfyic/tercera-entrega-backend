@@ -4,3 +4,4 @@ src/config/firebase/key.json
 src/views/uploads/products/**
 src/views/uploads/userAvatar/**
 !.gitkeep
+.vscode/settings.json
