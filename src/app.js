@@ -37,10 +37,9 @@ app.use(passport.session());
 app
 	.use(express.json())
 	.use(express.urlencoded({ extended: true }))
-	.use('/', express.static('./src/views'))
-	.use('/users/menu', express.static('./src/views/uploads/userAvatar'))
+	.use(express.static('public'))
 	.set('view engine', 'ejs')
-	.set('views', './src/views')
+	.set('views', 'public')
 	.use('/', v1LandRouter)
 	.use('/users', v1UserRouter)
 	.use('/api/v1/productos', isAuth, v1ProdRouter)
