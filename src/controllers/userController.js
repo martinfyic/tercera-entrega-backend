@@ -1,4 +1,5 @@
 import * as userService from '../services/userService.js';
+import { transporter } from '../config/nodemailer.js';
 
 export const getAllUsers = async (req, res) => {
 	const { limit, since } = req.query;
@@ -54,6 +55,44 @@ export const createNewUser = async (req, res) => {
 	} else {
 		try {
 			await userService.createNewUser(newUser);
+
+			await transporter.sendMail({
+				from: `"Nodemailer ⚡" <${process.env.NODEMAILER_EMAIL}>`,
+				to: `${process.env.NODEMAILER_EMAIL_ADMIN}`,
+				subject: 'Nuevo registro en DB ✔',
+				html: `
+					<h1>Nuevo registro en DB</h1>
+					<hr/>
+					<h3>Informacion:</h3>
+						<ul>
+							<li>
+								<strong>Nombre: ${body.first}</strong>
+							</li>
+							<li>
+								<strong>Apellido: ${body.last}</strong>
+							</li>
+							<li>
+								<strong>Edad: ${body.age}</strong>
+							</li>
+							<li>
+								<strong>Email: ${body.email}</strong>
+							</li>
+							<li>
+								<strong>Telefono: ${body.phone}</strong>
+							</li>
+							<li>
+								<strong>Calle: ${body.street}</strong>
+							</li>
+							<li>
+								<strong>Numero de calle: ${body.streetNum}</strong>
+							</li>
+							<li>
+								<strong>Numero de Apartamento: ${body.departmentNum}</strong>
+							</li>
+						</ul>
+					`,
+			});
+
 			res.redirect('/users/login');
 		} catch (error) {
 			throw error;
