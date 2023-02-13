@@ -112,7 +112,12 @@ export const loginUser = (req, res) => {
 
 export const userMenu = (req, res) => {
 	const user = req.user;
-	res.status(200).render('userMenu', { user });
+	const baseUrl = req.protocol + '://' + req.get('host');
+
+	res.status(200).render('userMenu', {
+		user,
+		baseUrl,
+	});
 };
 
 export const userLogOut = (req, res) => {
