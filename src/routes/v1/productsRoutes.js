@@ -1,12 +1,20 @@
 import express from 'express';
 import * as productController from '../../controllers/productController.js';
+import { productsUpload } from '../../middleware/multer.js';
 
 const v1ProdRouter = express.Router();
 
 v1ProdRouter
 	.get('/', productController.getAllProducts)
-	.get('/:prodId', productController.getProductById)
-	.post('/', productController.createNewProduct)
+	.get('/id/:prodId', productController.getProductById)
+	.get('/carga', (req, res) => {
+		res.render('uploadProducts');
+	})
+	.post(
+		'/',
+		productsUpload.single('thumbnail'),
+		productController.createNewProduct
+	)
 	.put('/:prodId', productController.upDateOneProduct)
 	.delete('/:prodId', productController.deleteOneProduct);
 
