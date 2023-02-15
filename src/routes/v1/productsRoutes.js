@@ -15,7 +15,7 @@ v1ProdRouter
 		productsUpload.single('thumbnail'),
 		productController.createNewProduct
 	)
-	.put('/:prodId', productController.upDateOneProduct)
-	.delete('/:prodId', productController.deleteOneProduct);
+	.put('/id/:prodId', productController.upDateOneProduct)
+	.delete('/id/:prodId', productController.deleteOneProduct);
 
 export default v1ProdRouter;
