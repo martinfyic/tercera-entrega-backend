@@ -2,7 +2,6 @@ import mongoos from 'mongoose';
 
 const productsSchema = mongoos.Schema(
 	{
-		_id: String,
 		title: String,
 		price: Number,
 		thumbnail: String,
