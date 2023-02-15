@@ -32,7 +32,6 @@ export const createNewProduct = async newProduct => {
 		};
 
 	const saveNewProduct = new productsModel({
-		_id: newProduct._id,
 		title: newProduct.title,
 		price: newProduct.price,
 		thumbnail: newProduct.thumbnail,
