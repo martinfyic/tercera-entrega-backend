@@ -3,7 +3,6 @@ import productsModel from '../../schemas/productsSchema.js';
 
 export const createCart = async newCart => {
 	const cartGenerated = new cartsModel({
-		_id: newCart.cartId,
 		products: newCart.products,
 	});
 
@@ -65,7 +64,7 @@ export const searchProd = async prodId => {
 export const addProductToCart = async (cartId, prodSelectedById) => {
 	if (prodSelectedById?.status === 'Error') return prodSelectedById;
 
-	const cartProduct = await cartsModel.findById(cartId);
+	const cartProduct = await cartsModel.findById(cartId).lean();
 	if (cartProduct === null)
 		return {
 			status: 'Error',
@@ -73,15 +72,16 @@ export const addProductToCart = async (cartId, prodSelectedById) => {
 		};
 
 	const existProduct = cartProduct.products.find(
-		product => product._id === prodSelectedById._id
+		product => product._id.toString() === prodSelectedById._id.toString()
 	);
 
 	if (existProduct) {
+		console.log(existProduct);
 		const products = cartProduct.products.map(prodInCart => {
-			if (prodInCart._id === prodSelectedById._id) {
-				(prodInCart.quantity += 1),
-					(prodInCart.stock -= 1),
-					(prodInCart.total = prodInCart.quantity * prodInCart.price);
+			if (prodInCart._id.toString() === prodSelectedById._id.toString()) {
+				prodInCart.quantity += 1;
+				prodInCart.stock -= 1;
+				prodInCart.total = prodInCart.quantity * prodInCart.price;
 			}
 			return prodInCart;
 		});
@@ -98,6 +98,7 @@ export const addProductToCart = async (cartId, prodSelectedById) => {
 			...cartProduct.products,
 			{
 				...prodSelectedById._doc,
+				// ...prodSelectedById,
 				quantity: 1,
 				total: prodSelectedById._doc.price,
 				stock: prodSelectedById._doc.stock - 1,
@@ -114,7 +115,8 @@ export const addProductToCart = async (cartId, prodSelectedById) => {
 };
 
 export const deleteProductInCart = async (cartId, prodId) => {
-	const cartProduct = await cartsModel.findById(cartId);
+	const cartProduct = await cartsModel.findById(cartId).lean();
+
 	if (cartProduct === null)
 		return {
 			status: 'Error',
@@ -122,12 +124,12 @@ export const deleteProductInCart = async (cartId, prodId) => {
 		};
 
 	const existProduct = cartProduct.products.find(
-		product => product._id === prodId
+		product => product._id.toString() === prodId
 	);
 
 	if (existProduct.quantity === 1) {
 		const products = cartProduct.products.filter(
-			prodInCart => prodInCart._id !== prodId
+			prodInCart => prodInCart._id.toString() !== prodId
 		);
 		cartProduct.products = products;
 		await cartsModel.findByIdAndUpdate(cartId, cartProduct);
@@ -140,10 +142,10 @@ export const deleteProductInCart = async (cartId, prodId) => {
 
 	if (existProduct) {
 		const products = cartProduct.products.map(prodInCart => {
-			if (prodInCart._id === prodId) {
-				(prodInCart.quantity -= 1),
-					(prodInCart.stock += 1),
-					(prodInCart.total = prodInCart.quantity * prodInCart.price);
+			if (prodInCart._id.toString() === prodId) {
+				prodInCart.quantity -= 1;
+				prodInCart.stock += 1;
+				prodInCart.total = prodInCart.quantity * prodInCart.price;
 			}
 			return prodInCart;
 		});
