@@ -12,12 +12,7 @@ export const getProductById = async prodId => {
 };
 
 export const createNewProduct = async newProduct => {
-	const productToSave = {
-		...newProduct,
-		_id: uuidv4(),
-	};
-
-	const savedProduct = await Products.createNewProduct(productToSave);
+	const savedProduct = await Products.createNewProduct(newProduct);
 	return savedProduct;
 };
 
