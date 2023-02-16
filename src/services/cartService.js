@@ -1,19 +1,15 @@
-import { v4 as uuidv4 } from 'uuid';
 import * as Cart from '../daos/carts/CartsDAOMongo.js';
 
 export const createCart = async () => {
 	const newCart = {
-		cartId: uuidv4(),
 		products: [],
-		timestampCreated: new Date().toLocaleString('es-UY'),
-		timestampUpdated: new Date().toLocaleString('es-UY'),
 	};
 	const cartGenerated = await Cart.createCart(newCart);
 	return cartGenerated;
 };
 
-export const getAllCarts = async () => {
-	const allCarts = await Cart.getAllCarts();
+export const getAllCarts = async (limit, since) => {
+	const allCarts = await Cart.getAllCarts(limit, since);
 	return allCarts;
 };
 

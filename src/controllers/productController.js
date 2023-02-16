@@ -1,8 +1,14 @@
 import * as productService from '../services/productService.js';
 
 export const getAllProducts = async (req, res) => {
-	const allProducts = await productService.getAllProducts();
-	res.status(200).send({ status: 'OK', data: allProducts });
+	const { limit, since } = req.query;
+	const baseUrl = req.protocol + '://' + req.get('host');
+
+	const products = await productService.getAllProducts(limit, since);
+	res.render('allProducts', {
+		products: products.allProducts,
+		baseUrl,
+	});
 };
 
 export const getProductById = async (req, res) => {
@@ -13,11 +19,12 @@ export const getProductById = async (req, res) => {
 
 export const createNewProduct = async (req, res) => {
 	const { body } = req;
+	const thumbnail = req.file ? req.file.filename : '';
 
 	const newProduct = {
 		title: body.title,
 		price: body.price,
-		thumbnail: body.thumbnail,
+		thumbnail: thumbnail,
 		description: body.description,
 		stock: body.stock,
 	};
@@ -25,7 +32,7 @@ export const createNewProduct = async (req, res) => {
 	if (
 		!body.title ||
 		!body.price ||
-		!body.thumbnail ||
+		!thumbnail ||
 		!body.description ||
 		!body.stock
 	) {
@@ -35,8 +42,8 @@ export const createNewProduct = async (req, res) => {
 			data: newProduct,
 		});
 	} else {
-		const createdProduct = await productService.createNewProduct(newProduct);
-		res.status(201).send({ status: 'ok', data: createdProduct });
+		await productService.createNewProduct(newProduct);
+		res.status(201).redirect('/api/v1/productos/carga');
 	}
 };
 

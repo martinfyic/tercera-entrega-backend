@@ -6,7 +6,8 @@ export const createCart = async (req, res) => {
 };
 
 export const getAllCarts = async (req, res) => {
-	const allCarts = await cartService.getAllCarts();
+	const { limit, since } = req.params;
+	const allCarts = await cartService.getAllCarts(limit, since);
 	res.send(allCarts);
 };
 
