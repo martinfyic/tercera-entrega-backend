@@ -61,35 +61,36 @@ export const createNewUser = async (req, res) => {
 				to: `${process.env.NODEMAILER_EMAIL_ADMIN}`,
 				subject: 'Nuevo registro en DB ✔',
 				html: `
-					<h1>Nuevo registro en DB</h1>
+					<h1>Nuevo registro en DB 🔥</h1>
 					<hr/>
 					<h3>Informacion:</h3>
-						<ul>
-							<li>
-								<strong>Nombre: ${body.first}</strong>
-							</li>
-							<li>
-								<strong>Apellido: ${body.last}</strong>
-							</li>
-							<li>
-								<strong>Edad: ${body.age}</strong>
-							</li>
-							<li>
-								<strong>Email: ${body.email}</strong>
-							</li>
-							<li>
-								<strong>Telefono: ${body.phone}</strong>
-							</li>
-							<li>
-								<strong>Calle: ${body.street}</strong>
-							</li>
-							<li>
-								<strong>Numero de calle: ${body.streetNum}</strong>
-							</li>
-							<li>
-								<strong>Numero de Apartamento: ${body.departmentNum}</strong>
-							</li>
-						</ul>
+					<ul>
+						<li>
+							<p><strong>Nombre:</strong> ${body.first}</p>
+						</li>
+						<li>
+							<strong>Apellido:</strong> ${body.last}</p>
+						</li>
+						<li>
+							<strong>Edad:</strong> ${body.age}</p>
+						</li>
+						<li>
+							<strong>Email:</strong> ${body.email}</p>
+						</li>
+						<li>
+							<strong>Telefono:</strong> ${body.phone}</p>
+						</li>
+						<li>
+							<strong>Calle:</strong> ${body.street}</p>
+						</li>
+						<li>
+							<strong>Numero de calle:</strong> ${body.streetNum}</p>
+						</li>
+						<li>
+							<strong>Numero de Apartamento:</strong> ${body.departmentNum}</p>
+						</li>
+					</ul>
+					<hr/>
 					`,
 			});
 
