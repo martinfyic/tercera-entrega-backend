@@ -6,6 +6,7 @@ import v1ProdRouter from './routes/v1/productsRoutes.js';
 import v1CartRouter from './routes/v1/cartRoutes.js';
 import v1UserRouter from './routes/v1/userRoutes.js';
 import v1LandRouter from './routes/v1/landRoutes.js';
+import v1OrderRouter from './routes/v1/ordersRoutes.js';
 import dbConnect from './config/MongoConnect.js';
 import error404 from './middleware/error404.js';
 import { strategyLogin } from './middleware/passport.js';
@@ -38,12 +39,14 @@ app
 	.use(express.json())
 	.use(express.urlencoded({ extended: true }))
 	.use(express.static('public'))
+	.use('/image', express.static('./public/uploads/products'))
 	.set('view engine', 'ejs')
 	.set('views', 'public')
 	.use('/', v1LandRouter)
 	.use('/users', v1UserRouter)
 	.use('/api/v1/productos', isAuth, v1ProdRouter)
 	.use('/api/v1/carrito', isAuth, v1CartRouter)
+	.use('/api/v1/ordenes', v1OrderRouter)
 	.use(error404);
 
 const connection = async () => {
