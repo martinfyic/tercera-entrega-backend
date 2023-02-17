@@ -1,10 +1,9 @@
-import express from 'express';
+import { Router } from 'express';
 import { check } from 'express-validator';
 import * as productController from '../../controllers/productController.js';
-import { fieldValidator } from '../../middleware/fieldValidator.js';
 import { productsUpload } from '../../middleware/multer.js';
 
-const v1ProdRouter = express.Router();
+const v1ProdRouter = Router();
 
 v1ProdRouter
 	.get('/', productController.getAllProducts)
