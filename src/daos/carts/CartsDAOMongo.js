@@ -4,12 +4,15 @@ import productsModel from '../../schemas/productsSchema.js';
 export const createCart = async newCart => {
 	const cartGenerated = new cartsModel({
 		products: newCart.products,
+		name: newCart.firstName,
+		lastname: newCart.lastName,
+		userId: newCart.userId,
 	});
 
 	await cartGenerated.save();
 	return {
 		status: 'OK',
-		message: `Carrito generado Id: ${newCart.cartId}`,
+		message: `Carrito generado`,
 		data: cartGenerated,
 	};
 };
@@ -76,7 +79,6 @@ export const addProductToCart = async (cartId, prodSelectedById) => {
 	);
 
 	if (existProduct) {
-		console.log(existProduct);
 		const products = cartProduct.products.map(prodInCart => {
 			if (prodInCart._id.toString() === prodSelectedById._id.toString()) {
 				prodInCart.quantity += 1;
