@@ -1,4 +1,6 @@
 import userModel from '../../schemas/userSchema.js';
+import cartModel from '../../schemas/cartsSchema.js';
+import { createCart } from '../../services/cartService.js';
 
 export const getAllUsers = async (limit = 10, since = 0) => {
 	try {
@@ -62,4 +64,15 @@ export const createNewUser = async newUser => {
 	} catch (error) {
 		throw error;
 	}
+};
+
+export const createUserCart = async user => {
+	const cartUser = await cartModel
+		.findOne({ userId: user._id.toString() })
+		.lean()
+		.exec();
+
+	if (cartUser) return;
+
+	await createCart(user);
 };
