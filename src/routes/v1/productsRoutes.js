@@ -9,7 +9,7 @@ v1ProdRouter
 	.get('/', productController.getAllProducts)
 	.get('/id/:prodId', productController.getProductById)
 	.get('/carga', (req, res) => {
-		res.render('uploadProducts');
+		res.render('uploadProducts', { title: '⚡ Carga Producto' });
 	})
 	.post(
 		'/',
