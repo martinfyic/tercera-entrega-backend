@@ -14,3 +14,7 @@ export const createNewUser = async newUser => {
 	const savedUser = await Users.createNewUser(newUser);
 	return savedUser;
 };
+
+export const createUserCart = async user => {
+	await Users.createUserCart(user);
+};
