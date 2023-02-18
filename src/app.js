@@ -40,6 +40,7 @@ app
 	.use(express.urlencoded({ extended: true }))
 	.use(express.static('public'))
 	.use('/image', express.static('./public/uploads/products'))
+	.use('/avatar', express.static('./public/uploads/userAvatar'))
 	.set('view engine', 'ejs')
 	.set('views', 'public')
 	.use('/', v1LandRouter)
