@@ -111,8 +111,9 @@ export const loginUser = (req, res) => {
 	res.render('login', { title: '⚡ Login' });
 };
 
-export const userMenu = (req, res) => {
+export const userMenu = async (req, res) => {
 	const user = req.user;
+	await userService.createUserCart(user);
 
 	res.status(200).render('userMenu', {
 		user,
