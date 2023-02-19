@@ -8,6 +8,8 @@ export const getAllOrders = async (req, res) => {
 
 export const createNewOrder = async (req, res) => {
 	const { idCart } = req.body;
-	const order = await orderService.createNewOrder(idCart);
+	const { user } = req;
+
+	const order = await orderService.createNewOrder(idCart, user);
 	res.status(201).send(order);
 };

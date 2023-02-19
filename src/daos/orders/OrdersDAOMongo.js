@@ -14,10 +14,10 @@ export const getAllOrders = async (limit = 10, since = 0) => {
 
 export const createNewOrder = async idCart => {
 	const cartById = await cartsModel.findById(idCart).lean();
-
-	// await newCart.save();
-	return {
-		status: 'OK',
-		// data: newCart,
-	};
+	if (cartById === null) {
+		return {
+			message: `El carrito con Id ${idCart} no fue encontrado`,
+		};
+	}
+	await cartById.save();
 };

@@ -17,7 +17,7 @@ export const getProductById = async (req, res) => {
 
 export const createNewProduct = async (req, res) => {
 	const { body } = req;
-	const thumbnail = req.file ? req.file.filename : '';
+	const thumbnail = req.file;
 
 	const newProduct = {
 		title: body.title,

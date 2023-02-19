@@ -16,7 +16,7 @@ export const getUserById = async (req, res) => {
 
 export const createNewUser = async (req, res) => {
 	const { body } = req;
-	const avatar = req.file ? req.file.filename : '';
+	const avatar = req.file ? req.file.filename : 'default-image.png';
 
 	const newUser = {
 		name: {
@@ -25,7 +25,7 @@ export const createNewUser = async (req, res) => {
 		},
 		email: body.email,
 		password: body.password,
-		avatar: `${req.protocol}://${req.get('host')}/image/${avatar}`,
+		avatar: `${req.protocol}://${req.get('host')}/avatar/${avatar}`,
 		phone: body.phone,
 		address: {
 			street: body.street,
