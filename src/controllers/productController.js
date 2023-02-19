@@ -4,6 +4,7 @@ export const getAllProducts = async (req, res) => {
 	const { limit, since } = req.query;
 	const products = await productService.getAllProducts(limit, since);
 	res.render('allProducts', {
+		title: '⚡ Productos',
 		products: products.allProducts,
 	});
 };
