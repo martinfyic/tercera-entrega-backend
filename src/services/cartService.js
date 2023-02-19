@@ -1,8 +1,11 @@
 import * as Cart from '../daos/carts/CartsDAOMongo.js';
 
-export const createCart = async () => {
+export const createCart = async user => {
 	const newCart = {
 		products: [],
+		firstName: user.name.first,
+		lastName: user.name.last,
+		userId: user._id.toString(),
 	};
 	const cartGenerated = await Cart.createCart(newCart);
 	return cartGenerated;

@@ -26,7 +26,7 @@ export const createNewUser = async (req, res) => {
 		},
 		email: body.email,
 		password: body.password,
-		avatar: avatar,
+		avatar: `${req.protocol}://${req.get('host')}/image/${avatar}`,
 		phone: body.phone,
 		address: {
 			street: body.street,
@@ -103,21 +103,20 @@ export const createNewUser = async (req, res) => {
 
 export const singUpUser = (req, res) => {
 	if (req.isAuthenticated()) return res.redirect('/users/menu');
-	res.render('signup');
+	res.render('signup', { title: '⚡ Signup' });
 };
 
 export const loginUser = (req, res) => {
 	if (req.isAuthenticated()) return res.redirect('/users/menu');
-	res.render('login');
+	res.render('login', { title: '⚡ Login' });
 };
 
-export const userMenu = (req, res) => {
+export const userMenu = async (req, res) => {
 	const user = req.user;
-	const baseUrl = req.protocol + '://' + req.get('host');
+	await userService.createUserCart(user);
 
 	res.status(200).render('userMenu', {
 		user,
-		baseUrl,
 	});
 };
 
@@ -130,5 +129,5 @@ export const userLogOut = (req, res) => {
 
 export const loginError = (req, res) => {
 	if (req.isAuthenticated()) return res.redirect('/users/menu');
-	res.render('error-login');
+	res.render('error-login', { title: '⚠️ Error en login' });
 };

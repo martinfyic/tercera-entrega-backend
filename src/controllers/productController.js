@@ -2,12 +2,9 @@ import * as productService from '../services/productService.js';
 
 export const getAllProducts = async (req, res) => {
 	const { limit, since } = req.query;
-	const baseUrl = req.protocol + '://' + req.get('host');
-
 	const products = await productService.getAllProducts(limit, since);
 	res.render('allProducts', {
 		products: products.allProducts,
-		baseUrl,
 	});
 };
 
@@ -24,7 +21,7 @@ export const createNewProduct = async (req, res) => {
 	const newProduct = {
 		title: body.title,
 		price: body.price,
-		thumbnail: thumbnail,
+		thumbnail: `${req.protocol}://${req.get('host')}/image/${thumbnail}`,
 		description: body.description,
 		stock: body.stock,
 	};

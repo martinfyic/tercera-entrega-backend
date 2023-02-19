@@ -78,7 +78,7 @@
 										data-bs-toggle="dropdown"
 										aria-expanded="false"
 									>
-										Usuario: @<%=user.name.first%> <%=user.name.last%>
+										👤 <%=user.name.first%> <%=user.name.last%>
 									</a>
 									<ul
 										class="dropdown-menu"
@@ -97,7 +97,7 @@
 									<img
 										class="rounded-4"
 										width="40"
-										src="<%= baseUrl %>/uploads/userAvatar/<%=user.avatar%>"
+										src="<%=user.avatar%>"
 										alt="Avatar del usuario"
 									/>
 								</picture>

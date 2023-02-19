@@ -1,7 +1,8 @@
 import * as cartService from '../services/cartService.js';
 
 export const createCart = async (req, res) => {
-	const newCart = await cartService.createCart();
+	const { user } = req;
+	const newCart = await cartService.createCart(user);
 	res.status(201).send(newCart);
 };
 

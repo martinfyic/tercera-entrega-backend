@@ -78,7 +78,7 @@
 				<div class="col-md-6 col-xl-3">
 					<div class="card border-0 p-5">
 						<img
-							src="<%= baseUrl %>/uploads/products/<%=product.thumbnail%>"
+							src="<%=product.thumbnail%>"
 							class="card-img-top"
 							alt="<%= product.title %>"
 						/>
@@ -86,12 +86,8 @@
 							class="card-body d-flex align-items-center flex-column justify-content-around"
 						>
 							<h5 class="fs-6"><%= product.title %></h5>
-							<p class="card-text text-secondary">$U <%= product.price %></p>
-							<a
-								class="btn btn-dark"
-								href="#"
-								>Agregar al carrito</a
-							>
+							<p class="card-text text-secondary">$U product.price %></p>
+							<button class="btn btn-dark">Agregar al carrito</button>
 						</div>
 					</div>
 				</div>
