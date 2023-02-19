@@ -1,0 +1,38 @@
+<div
+	class="container my-4 d-flex justify-content-evenly align-items-start gap-3"
+>
+	<div class="border border-dark border-2 rounded p-5 w-75">
+		<h2 class="fs-2 text-center">Informacion Personal</h2>
+		<hr />
+		<p class="my-3"><strong>Nombre: </strong><%=user.name.first%></p>
+		<p class="my-3"><strong>Apellido: </strong><%=user.name.last%></p>
+		<p class="my-3"><strong>Edad: </strong><%=user.age%></p>
+		<hr />
+		<p class="my-3"><strong>Correo: </strong><%=user.email%></p>
+		<p class="my-3"><strong>Telefono: </strong><%=user.phone%></p>
+		<hr />
+		<p class="my-3"><strong>Direccion: </strong><%=user.address.street%></p>
+		<p class="my-3">
+			<strong>Nro. Puerta: </strong><%=user.address.streetNum%>
+		</p>
+		<p class="my-3">
+			<strong>Nro. Apto: </strong><%=user.address.departmentNum%>
+		</p>
+	</div>
+	<div class="border border-dark border-2 rounded p-5 w-75">
+		<h2 class="fs-2 text-center">Ordenes</h2>
+		<hr />
+		<p class="my-3"><strong>Numero de Orden: </strong></p>
+		<p class="my-3"><strong>Fecha de compra: </strong></p>
+		<p class="my-3"><strong>Cantidad de productos: </strong></p>
+		<p class="my-3"><strong>Importe total: </strong>$</p>
+		<hr />
+		<div class="d-flex justify-content-center align-items-center mt-3">
+			<a
+				class="btn btn-dark"
+				href="#"
+				>Ver Orden</a
+			>
+		</div>
+	</div>
+</div>
