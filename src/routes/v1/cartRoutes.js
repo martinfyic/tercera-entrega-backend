@@ -1,7 +1,7 @@
-import express from 'express';
+import { Router } from 'express';
 import * as cartController from '../../controllers/cartController.js';
 
-const v1CartRouter = express.Router();
+const v1CartRouter = Router();
 
 v1CartRouter
 	.post('/', cartController.createCart)
