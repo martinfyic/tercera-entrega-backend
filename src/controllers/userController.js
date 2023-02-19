@@ -116,6 +116,7 @@ export const userMenu = async (req, res) => {
 	await userService.createUserCart(user);
 
 	res.status(200).render('userMenu', {
+		title: '⚡ User Menu',
 		user,
 	});
 };
