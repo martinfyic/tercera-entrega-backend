@@ -8,7 +8,7 @@ Un menú de registro y autenticación de usuarios basado en passport local, guar
 
 - Ante la incorporación de un usuario, el servidor enviará un email al administrador con todos los datos de registro y asunto 'nuevo registro', a una dirección que se encuentre por el momento almacenada en una constante global. ✅
 
-- El usuario iniciará la acción de pedido en la vista del carrito.
+- El usuario iniciará la acción de pedido en la vista del carrito. ✅
 
 - Será enviado una vez finalizada la elección para la realizar la compra de productos.
 
