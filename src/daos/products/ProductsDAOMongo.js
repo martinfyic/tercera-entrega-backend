@@ -1,4 +1,4 @@
-import productsModel from '../../schemas/productsSchema.js';
+import { productsModel } from '../../schemas/index.js';
 
 export const getAllProducts = async (limit = 10, since = 0) => {
 	const allProducts = await productsModel

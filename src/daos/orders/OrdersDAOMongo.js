@@ -1,5 +1,4 @@
-import ordersModel from '../../schemas/ordersSchema.js';
-import cartsModel from '../../schemas/cartsSchema.js';
+import { ordersModel, cartsModel } from '../../schemas/index.js';
 
 export const getAllOrders = async (limit = 10, since = 0) => {
 	const allOrders = await productsModel
