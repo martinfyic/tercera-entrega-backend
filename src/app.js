@@ -3,15 +3,15 @@ import express from 'express';
 import passport from 'passport';
 import session from 'express-session';
 import cors from 'cors';
-import v1ProdRouter from './routes/v1/productsRoutes.js';
-import v1CartRouter from './routes/v1/cartRoutes.js';
-import v1UserRouter from './routes/v1/userRoutes.js';
-import v1LandRouter from './routes/v1/landRoutes.js';
-import v1OrderRouter from './routes/v1/ordersRoutes.js';
 import dbConnect from './config/MongoConnect.js';
-import error404 from './middleware/error404.js';
-import { strategyLogin } from './middleware/passport.js';
-import { isAuth } from './middleware/isAuth.js';
+import {
+	v1CartRouter,
+	v1LandRouter,
+	v1OrderRouter,
+	v1ProdRouter,
+	v1UserRouter,
+} from './routes/v1/index.js';
+import { error404, strategyLogin, isAuth } from './middleware/index.js';
 
 const PORT = process.env.PORT || 8080;
 
