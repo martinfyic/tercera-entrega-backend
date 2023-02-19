@@ -1,5 +1,4 @@
-import cartsModel from '../../schemas/cartsSchema.js';
-import productsModel from '../../schemas/productsSchema.js';
+import { cartsModel, productsModel } from '../../schemas/index.js';
 
 export const createCart = async newCart => {
 	const cartGenerated = new cartsModel({
