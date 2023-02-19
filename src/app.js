@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import passport from 'passport';
 import session from 'express-session';
+import cors from 'cors';
 import v1ProdRouter from './routes/v1/productsRoutes.js';
 import v1CartRouter from './routes/v1/cartRoutes.js';
 import v1UserRouter from './routes/v1/userRoutes.js';
@@ -37,6 +38,7 @@ app.use(passport.session());
 
 app
 	.use(express.json())
+	.use(cors())
 	.use(express.urlencoded({ extended: true }))
 	.use(express.static('public'))
 	.use('/image', express.static('./public/uploads/products'))
