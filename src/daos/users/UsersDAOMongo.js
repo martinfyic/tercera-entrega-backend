@@ -1,5 +1,4 @@
-import userModel from '../../schemas/userSchema.js';
-import cartModel from '../../schemas/cartsSchema.js';
+import { userModel, cartsModel } from '../../schemas/index.js';
 import { createCart } from '../../services/cartService.js';
 
 export const getAllUsers = async (limit = 10, since = 0) => {
@@ -67,7 +66,7 @@ export const createNewUser = async newUser => {
 };
 
 export const createUserCart = async user => {
-	const cartUser = await cartModel
+	const cartUser = await cartsModel
 		.findOne({ userId: user._id.toString() })
 		.lean()
 		.exec();
