@@ -2,59 +2,7 @@
 
 	<body>
 		<header>
-			<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-				<div class="container d-flex">
-					<a
-						class="navbar-brand me-auto"
-						href="#"
-						>#Logo</a
-					>
-					<button
-						class="navbar-toggler"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#navbarNavAltMarkup"
-						aria-controls="navbarNavAltMarkup"
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div
-						class="collapse navbar-collapse"
-						id="navbarNavAltMarkup"
-					>
-						<div class="navbar-nav">
-							<a
-								class="nav-link"
-								aria-current="page"
-								href="/"
-								>Home</a
-							>
-							<a
-								class="nav-link"
-								href="#"
-								>Productos</a
-							>
-							<a
-								class="nav-link"
-								href="/api/v1/carrito"
-								>Carrito</a
-							>
-							<a
-								class="nav-link"
-								href="/users"
-								>Usuarios</a
-							>
-							<a
-								class="nav-link"
-								href="/users/menu"
-								>User Menu</a
-							>
-						</div>
-					</div>
-				</div>
-			</nav>
+			<%- include('nav/nav.ejs') %>
 		</header>
 		<main class="container">
 			<h1 class="text-center m-5 p-5 fs-1 fw-bold">✨ Colleccion Otoño ✨</h1>
@@ -72,8 +20,11 @@
 							class="card-body d-flex align-items-center flex-column justify-content-around"
 						>
 							<h5 class="fs-6"><%= product.title %></h5>
-							<p class="card-text text-secondary">$U product.price %></p>
-							<button class="btn btn-dark">Agregar al carrito</button>
+							<p class="card-text text-secondary">$U <%= product.price %></p>
+							<a href="http://localhost:8585/api/v1/productos/id/<%= product._id %>" class="btn btn-outline-dark">Ver producto</a>
+							<form action="/api/v1/carrito/<%=userCart%>/productos" method="post">
+								<button class="btn btn-dark mt-3" type="submit" name="_id" value="<%=product._id %>">Agregar al carrito</button>
+							</form>
 						</div>
 					</div>
 				</div>
