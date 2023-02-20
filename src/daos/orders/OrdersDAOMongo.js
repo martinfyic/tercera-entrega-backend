@@ -12,12 +12,29 @@ export const getAllOrders = async (limit = 10, since = 0) => {
 	};
 };
 
-export const createNewOrder = async idCart => {
+export const createNewOrder = async (idCart, user) => {
 	const cartById = await cartsModel.findById(idCart).lean();
 	if (cartById === null) {
 		return {
 			message: `El carrito con Id ${idCart} no fue encontrado`,
 		};
 	}
-	await cartById.save();
+
+	const newOrder = new ordersModel({
+		user: {
+			firstName: user.name.first,
+			lastName: user.name.last,
+		},
+		userId: user.name._id,
+		address: {
+			street: user.address.street,
+			streetNum: user.address.streetNum,
+			departmentNum: user.address.departmentNum,
+		},
+		products: cartById.products,
+	});
+
+	await newOrder.save();
+	const seeNewOrder = await ordersModel.findOne({ userId: user.name._id });
+	return seeNewOrder;
 };
