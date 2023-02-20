@@ -1,18 +1,28 @@
 import * as productService from '../services/productService.js';
+import { cartsModel } from '../schemas/index.js';
 
 export const getAllProducts = async (req, res) => {
 	const { limit, since } = req.query;
 	const products = await productService.getAllProducts(limit, since);
+	const { user } = req;
+	const userCart = await cartsModel.findOne({ userId: user._id });
 	res.render('allProducts', {
 		title: '⚡ Productos',
 		products: products.allProducts,
+		userCart: userCart._id,
 	});
 };
 
 export const getProductById = async (req, res) => {
 	const { prodId } = req.params;
+	const { user } = req;
+	const userCart = await cartsModel.findOne({ userId: user._id });
 	const productById = await productService.getProductById(prodId);
-	res.status(200).send({ status: 'OK', data: productById });
+	res.render('productById', {
+		title: '⚡ Producto',
+		productById,
+		userCart: userCart._id,
+	});
 };
 
 export const createNewProduct = async (req, res) => {
