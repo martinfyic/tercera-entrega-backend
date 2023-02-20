@@ -23,7 +23,7 @@ export const deletCart = async (req, res) => {
 export const cartProductById = async (req, res) => {
 	const { cartId } = req.params;
 	const productsInCartId = await cartService.cartProductById(cartId);
-	res.status(200).send({ status: 'ok', data: productsInCartId });
+	res.status(200).render('cartUser', { title: '⚡ Carrito', productsInCartId });
 };
 
 export const addProductToCart = async (req, res) => {

@@ -1,0 +1,32 @@
+<%- include('head/head.ejs') %>
+<body>
+  <%- include('nav/nav.ejs') %>
+  <main class="container">
+    <h1 class="text-center fs-1 mt-5"> 🛒 Carrito</h1>
+    <% productsInCartId.products.forEach(function(product) { %>
+      <hr>
+      <section class="container d-flex my-3 justify-content-center align-items-center">
+      <picture >
+        <img class="w-25" src="<%= product.thumbnail %>" alt="<%= product.title %>">
+      </picture>
+      <div>
+        <ul>
+          <li><strong>Producto: </strong><%= product.title %></li>
+          <li><strong>Precio: </strong>$U<%= product.price %></li>
+          <li><strong>Cantidad: </strong><%= product.quantity %></li>
+          <li><strong>Total: </strong>$U<%= product.total %></li>
+        </ul>
+        <div class="d-flex justify-content-center align-items-center">
+          <button class="btn btn-danger">Eliminar 🗑️</button>
+        </div>
+      </div>
+      <hr>
+    </section>
+      <% }); %>
+      <hr>
+      <div class="d-flex justify-content-center align-items-center my-5">
+        <button class="btn btn-dark px-5">Finalizar compra 🔥</button>
+      </div>
+  </main>
+</body>
+</html>
