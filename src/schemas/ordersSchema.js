@@ -3,7 +3,7 @@ import mongoos from 'mongoose';
 const ordersSchema = mongoos.Schema(
 	{
 		number: { type: String, required: true },
-		delivered: { type: Boolean, required: true, default: false },
+		delivered: { type: Boolean, default: false },
 		user: { type: String, required: true },
 		address: { type: String, required: true },
 		products: { type: Array, required: true },
