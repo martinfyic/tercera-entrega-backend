@@ -31,12 +31,19 @@
 		<p class="my-3"><strong>Importe total: </strong>$<%= order.total %></p>
 		<hr />
 		<% }); %>
-		<div class="d-flex justify-content-center align-items-center mt-3">
-			<a
+		<form
+			class="d-flex justify-content-center align-items-center mt-3"
+			action="http://localhost:8585/api/v1/ordenes"
+			method="post"
+		>
+			<button
 				class="btn btn-dark"
-				href="#"
-				>Finalizar Orden</a
+				type="submit"
+				name="idCart"
+				value="<%=userCart._id %>"
 			>
-		</div>
+				Finalizar Orden
+			</button>
+		</form>
 	</div>
 </div>
