@@ -75,12 +75,11 @@ export const loginUser = (req, res) => {
 export const userMenu = async (req, res) => {
 	const user = req.user;
 	const userCart = await userService.createUserCart(user);
-	console.log(userCart.products);
 
 	res.status(200).render('userMenu', {
 		title: '⚡ User Menu',
 		user,
-		userCart: userCart.products,
+		userCart,
 	});
 };
 
