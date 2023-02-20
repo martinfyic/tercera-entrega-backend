@@ -1,0 +1,36 @@
+<%- include('head/head.ejs') %>
+<body>
+  <%- include('nav/nav.ejs') %>
+  <h1 class="text-center fs-2 my-5">➡️ Orden Id: <strong class="text-danger"><%= order._id %></strong></h1>
+  <main class="container">
+    <h3 class="text-center fs-3 my-3">📦 Productos</h3>
+    <% order.products.forEach(function(product) { %>
+      <hr>
+      <section class="container d-flex my-3 justify-content-around align-items-center">
+      <picture >
+        <img class="w-25" src="<%= product.thumbnail %>" alt="<%= product.title %>">
+      </picture>
+      <div>
+        <ul>
+          <li><strong>Producto: </strong><%= product.title %></li>
+          <li><strong>Precio: </strong>$U<%= product.price %></li>
+          <li><strong>Cantidad: </strong><%= product.quantity %></li>
+          <li><strong>Total: </strong>$U<%= product.total %></li>
+        </ul>
+      </div>
+    </section>
+      <% }); %>
+      <hr>
+      <section class="container my-5">
+        <h3 class="text-center my-5 fs-3">Envio 🚚</h3>
+        <p class="text-center my-3 fs-5"><strong>Direccion: </strong>Calle <%= order.address.street %>, Numero de puerta <%= order.address.streetNum %>, Numero de apto <%= order.address.departmentNum %></p>
+        <p class="text-center my-3 fs-5"><strong>Nombre Destinatario: </strong><%= order.user.firstName %> <%= order.user.lastName %></p>
+      </section>
+      <section class="container">
+        <h3 class="text-center my-5 fs-3">✨ Gracias por tu compra ✨</h3>
+      </section>
+  </main>
+
+  
+</body>
+</html>
