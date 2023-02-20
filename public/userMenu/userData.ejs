@@ -21,7 +21,7 @@
 	</div>
 	<div class="border border-dark border-2 rounded p-5 w-75">
 		<h2 class="fs-2 text-center">Ordenes</h2>
-		<% userCart.forEach(function(order) { %>
+		<% userCart.products.forEach(function(order) { %>
 		<hr />
 		<p class="my-3"><strong>Producto: </strong><%= order.title %></p>
 		<p class="my-3"><strong>Fecha de compra: </strong><%= order.createdAt %></p>
