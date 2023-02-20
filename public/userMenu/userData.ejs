@@ -21,17 +21,21 @@
 	</div>
 	<div class="border border-dark border-2 rounded p-5 w-75">
 		<h2 class="fs-2 text-center">Ordenes</h2>
+		<% userCart.forEach(function(order) { %>
 		<hr />
-		<p class="my-3"><strong>Numero de Orden: </strong></p>
-		<p class="my-3"><strong>Fecha de compra: </strong></p>
-		<p class="my-3"><strong>Cantidad de productos: </strong></p>
-		<p class="my-3"><strong>Importe total: </strong>$</p>
+		<p class="my-3"><strong>Producto: </strong><%= order.title %></p>
+		<p class="my-3"><strong>Fecha de compra: </strong><%= order.createdAt %></p>
+		<p class="my-3">
+			<strong>Cantidad de productos: </strong><%= order.quantity %>
+		</p>
+		<p class="my-3"><strong>Importe total: </strong>$<%= order.total %></p>
 		<hr />
+		<% }); %>
 		<div class="d-flex justify-content-center align-items-center mt-3">
 			<a
 				class="btn btn-dark"
 				href="#"
-				>Ver Orden</a
+				>Finalizar Orden</a
 			>
 		</div>
 	</div>
