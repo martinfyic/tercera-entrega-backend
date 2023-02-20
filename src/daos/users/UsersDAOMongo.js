@@ -71,7 +71,8 @@ export const createUserCart = async user => {
 		.lean()
 		.exec();
 
-	if (cartUser) return;
+	if (cartUser) return cartUser;
 
-	await createCart(user);
+	const newCartUser = await createCart(user);
+	return newCartUser;
 };

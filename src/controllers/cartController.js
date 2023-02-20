@@ -29,8 +29,8 @@ export const cartProductById = async (req, res) => {
 export const addProductToCart = async (req, res) => {
 	const { cartId } = req.params;
 	const { body } = req;
-	const saveProdInCart = await cartService.addProductToCart(cartId, body);
-	res.status(201).send(saveProdInCart);
+	await cartService.addProductToCart(cartId, body);
+	res.status(200).redirect('/api/v1/productos');
 };
 
 export const deleteProductInCart = async (req, res) => {

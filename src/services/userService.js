@@ -56,5 +56,6 @@ export const createNewUser = async newUser => {
 };
 
 export const createUserCart = async user => {
-	await Users.createUserCart(user);
+	const userCart = await Users.createUserCart(user);
+	return userCart;
 };

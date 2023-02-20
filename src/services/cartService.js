@@ -28,11 +28,7 @@ export const cartProductById = async cartId => {
 
 export const addProductToCart = async (cartId, prodId) => {
 	const prodSelectedById = await Cart.searchProd(prodId);
-	const productAddedToCart = await Cart.addProductToCart(
-		cartId,
-		prodSelectedById
-	);
-	return productAddedToCart;
+	await Cart.addProductToCart(cartId, prodSelectedById);
 };
 
 export const deleteProductInCart = async (cartId, prodId) => {
