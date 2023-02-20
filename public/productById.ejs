@@ -2,28 +2,7 @@
 <body>
   <%- include('nav/nav.ejs') %>
 <div class="container">
-  <h1 class="text-center my-5">🔥 <%= productById.title %> 🔥</h1>
-  <section class="container d-flex row justify-content-center align-items-center">
-    <hr>
-    <div class="col-md-6">
-      <div class="card border-0 p-5">
-        <img
-          src="<%=productById.thumbnail%>"
-          class="card-img-top"
-          alt="<%= productById.title %>"
-        />
-        <div
-          class="card-body d-flex align-items-center flex-column justify-content-around"
-        >
-          <p class="card-text text-secondary">$U <%=productById.price %></p>
-          <form action="/api/v1/carrito/<%=userCart%>/productos" method="post">
-            <button class="btn btn-dark mt-3" type="submit" name="_id" value="<%=productById._id %>">Agregar al carrito</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <hr />
-  </section>
+  <%- include('products/getById.ejs') %>
 </div>
   
 </body>
