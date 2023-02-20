@@ -2,10 +2,17 @@ import mongoos from 'mongoose';
 
 const ordersSchema = mongoos.Schema(
 	{
-		number: { type: String, required: true },
 		delivered: { type: Boolean, default: false },
-		user: { type: String, required: true },
-		address: { type: String, required: true },
+		user: {
+			firstName: { type: String, required: true },
+			lastName: { type: String, required: true },
+		},
+		userId: { type: String, required: true },
+		address: {
+			street: { type: String, required: true },
+			streetNum: { type: Number, required: true },
+			departmentNum: { type: Number, required: true },
+		},
 		products: { type: Array, required: true },
 	},
 	{ timestamps: true, versionKey: false }

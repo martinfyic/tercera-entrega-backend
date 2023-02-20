@@ -8,25 +8,25 @@ export const getAllOrders = async (limit, since) => {
 };
 
 export const createNewOrder = async (idCart, user) => {
-	const savedOrder = await Orders.createNewOrder(idCart);
 	const cartBuy = await cartsModel.findById(idCart).lean();
 	if (cartBuy === null) return { message: 'Carrito no encontrado' };
+	const savedOrder = await Orders.createNewOrder(idCart, user);
 
 	let prodDetail = '';
-	cartBuy.products.forEach(prod => {
+	savedOrder.products.forEach(prod => {
 		prodDetail += `
 			<ul>
 				<li>
-					Producto: ${prod.title}
+					<strong>Producto: </strong>${prod.title}
 				</li>
 				<li>
-					Precio: $${prod.price}
+					<strong>Precio: </strong>$${prod.price}
 				</li>
 				<li>
-					Cantidad: ${prod.quantity}
+					<strong>Cantidad: </strong>${prod.quantity}
 				</li>
 				<li>
-					Total: $${prod.quantity}
+					<strong>Total: </strong>$${prod.quantity}
 				</li>
 			</ul>`;
 	});
@@ -39,10 +39,11 @@ export const createNewOrder = async (idCart, user) => {
 			<h1>Nuevo pedido 🔥</h1>
 			<hr/>
 			<h3>Informacion:</h3>
+			<h4><strong>Nro de Orden: </strong> ${savedOrder._id}</h4>
 			<h4><strong>Nombre: </strong> ${user.name.first} ${user.name.last}</h4>
-			<h4><strong>Nombre: </strong> ${user.name.first} ${user.name.last}</h4>
-			<h4><strong>Fecha: </strong> ${cartBuy.createdAt}</h4>
-			<h4><strong>Productis: </strong></h4>
+			<h4><strong>Id usuario: </strong> ${savedOrder.userId}</h4>
+			<h4><strong>Fecha: </strong> ${savedOrder.createdAt}</h4>
+			<h4><strong>Productos: </strong></h4>
 			<div>${prodDetail}</div>
 			<hr/>
 			`,
