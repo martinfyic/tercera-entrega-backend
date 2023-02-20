@@ -11,5 +11,5 @@ export const createNewOrder = async (req, res) => {
 	const { user } = req;
 
 	const order = await orderService.createNewOrder(idCart, user);
-	res.status(201).send(order);
+	res.status(201).render('order', { title: '⚡ Orden de compra', order });
 };
