@@ -1,7 +1,7 @@
 <h1 class="text-center my-5">🔥 <%= productById.title %> 🔥</h1>
 <section class="container d-flex row justify-content-center align-items-center">
 	<hr />
-	<div class="col-md-6">
+	<div class="col-md-6 d-flex">
 		<div class="card border-0 p-5">
 			<img
 				src="<%=productById.thumbnail%>"
@@ -11,7 +11,10 @@
 			<div
 				class="card-body d-flex align-items-center flex-column justify-content-around"
 			>
-				<p class="card-text text-secondary">$U <%=productById.price %></p>
+				<p class="card-text text-dark fs-2">$U <%=productById.price %></p>
+				<p class="card-text text-secondary fs-4">
+					<%=productById.description %>
+				</p>
 				<form
 					action="/api/v1/carrito/<%=userCart%>/productos"
 					method="post"
@@ -22,9 +25,14 @@
 						name="_id"
 						value="<%=productById._id %>"
 					>
-						Agregar al carrito
+						Agregar 🛒
 					</button>
 				</form>
+				<a
+					class="btn btn-outline-secondary mt-3 px-4"
+					href="/api/v1/productos"
+					>Volver</a
+				>
 			</div>
 		</div>
 	</div>
