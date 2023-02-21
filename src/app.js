@@ -3,7 +3,7 @@ import express from 'express';
 import passport from 'passport';
 import session from 'express-session';
 import cors from 'cors';
-import dbConnect from './config/MongoConnect.js';
+import { dbConnect, logger } from './config/index.js';
 import {
 	v1CartRouter,
 	v1LandRouter,
@@ -55,12 +55,12 @@ app
 const connection = async () => {
 	await dbConnect();
 	const serverOn = app.listen(PORT, () => {
-		console.log(
+		logger.info(
 			`***** 🚀 Servidor funcionando en http://localhost:${PORT} *****`
 		);
 	});
 	serverOn.on('error', err => {
-		console.log(`⚠️ Error en el servidor ===> ${err?.message}`);
+		logger.error(`⚠️ Error en el servidor ===> ${err?.message}`);
 	});
 };
 
