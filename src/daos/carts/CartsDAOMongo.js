@@ -9,11 +9,7 @@ export const createCart = async newCart => {
 	});
 
 	await cartGenerated.save();
-	return {
-		status: 'OK',
-		message: `Carrito generado`,
-		data: cartGenerated,
-	};
+	return cartGenerated;
 };
 
 export const getAllCarts = async (limit = 10, since = 0) => {
