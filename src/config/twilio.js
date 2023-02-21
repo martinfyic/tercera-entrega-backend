@@ -1,4 +1,5 @@
 import twilio from 'twilio';
+import { logger } from './index.js';
 
 const accountSid = process.env.TWILIO_ACOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -13,6 +14,6 @@ export const sendWhatsapp = async (userPhone, OrderNum) => {
 			to: userPhone,
 		});
 	} catch (error) {
-		console.log(error);
+		logger.error(error);
 	}
 };

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import { logger } from './index.js';
 
-const dbConnect = () => {
+export const dbConnect = () => {
 	const MONGODB_URL = process.env.MONGODB_URL;
 	mongoose.connect(
 		MONGODB_URL,
@@ -10,10 +11,8 @@ const dbConnect = () => {
 		},
 		err => {
 			!err
-				? console.log('***** CONECTADO A MONGODB ✅ *****')
-				: console.log('***** ERROR EN CONEXION A DB ⚠️ *****');
+				? logger.info('***** CONECTADO A MONGODB ✅ *****')
+				: logger.error('***** ERROR EN CONEXION A DB ⚠️ *****');
 		}
 	);
 };
-
-export default dbConnect;

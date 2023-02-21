@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { logger } from './index.js';
 
 export const transporter = nodemailer.createTransport({
 	host: 'smtp.gmail.com',
@@ -11,5 +12,5 @@ export const transporter = nodemailer.createTransport({
 });
 
 transporter.verify().then(() => {
-	console.log('***** 🔥 Ready for send emails *****');
+	logger.info('***** 🔥 Ready for send emails *****');
 });
