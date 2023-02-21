@@ -16,8 +16,8 @@ export const deletCart = async (req, res) => {
 	const { cartId } = req.params;
 	if (!cartId) return;
 
-	const cartDeleted = await cartService.deletCart(cartId);
-	res.status(200).send(cartDeleted);
+	await cartService.deletCart(cartId);
+	res.status(200);
 };
 
 export const cartProductById = async (req, res) => {
