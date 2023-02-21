@@ -20,8 +20,9 @@
 		</p>
 	</div>
 	<div class="border border-dark border-2 rounded p-5 w-75">
-		<h2 class="fs-2 text-center">Ordenes</h2>
-		<% userCart.products.forEach(function(order) { %>
+		<h2 class="fs-2 text-center">Carrito 🛒</h2>
+		<% if (userCart !== undefined) { %> <%
+		userCart.products.forEach(function(order) { %>
 		<hr />
 		<p class="my-3"><strong>Producto: </strong><%= order.title %></p>
 		<p class="my-3"><strong>Fecha de compra: </strong><%= order.createdAt %></p>
@@ -30,20 +31,34 @@
 		</p>
 		<p class="my-3"><strong>Importe total: </strong>$<%= order.total %></p>
 		<hr />
-		<% }); %>
+		<% }); %> <% } else { %>
+		<hr />
+		<p class="my-3"><strong>Producto: </strong></p>
+		<p class="my-3"><strong>Fecha de compra: </strong></p>
+		<p class="my-3">
+			<strong>Cantidad de productos: </strong>
+		</p>
+		<p class="my-3"><strong>Importe total: </strong></p>
+		<hr />
+		<% } %> <% if (userCart.products.length !== 0) { %>
 		<form
 			class="d-flex justify-content-center align-items-center mt-3"
 			action="http://localhost:8585/api/v1/ordenes"
 			method="post"
 		>
 			<button
-				class="btn btn-dark"
+				class="btn btn-dark px-4 py-2"
 				type="submit"
 				name="idCart"
 				value="<%=userCart._id %>"
 			>
-				Finalizar Orden
+				Finalizar compra
 			</button>
 		</form>
+		<% } else { %>
+		<p class="text-center fs-4 my-5 bg-secondary p-3 rounded">
+			<strong class="text-light">Vacio</strong>
+		</p>
+		<% } %>
 	</div>
 </div>
