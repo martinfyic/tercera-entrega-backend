@@ -1,3 +1,4 @@
+import twilio from 'twilio';
 import * as Orders from '../daos/orders/OrdersDAOMongo.js';
 import * as Carts from '../daos/carts/CartsDAOMongo.js';
 import { transporter } from '../config/nodemailer.js';
@@ -49,6 +50,22 @@ export const createNewOrder = async (idCart, user) => {
 			<hr/>
 			`,
 	});
+
+	const accountSid = process.env.TWILIO_ACOUNT_SID;
+	const authToken = process.env.TWILIO_AUTH_TOKEN;
+
+	const client = twilio(accountSid, authToken);
+
+	try {
+		const message = await client.messages.create({
+			body: 'mensaje desde Node Js prueba',
+			from: process.env.TWILIO_PHONE,
+			to: process.env.PHONE_TEST, // --> user phone
+		});
+		console.log(message);
+	} catch (error) {
+		console.log(error);
+	}
 
 	await Carts.deletCart(idCart);
 	return savedOrder;
