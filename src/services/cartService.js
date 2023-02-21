@@ -17,8 +17,7 @@ export const getAllCarts = async (limit, since) => {
 };
 
 export const deletCart = async cartId => {
-	const cartDeleted = await Cart.deletCart(cartId);
-	return cartDeleted;
+	await Cart.deletCart(cartId);
 };
 
 export const cartProductById = async cartId => {

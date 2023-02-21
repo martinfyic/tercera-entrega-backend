@@ -9,11 +9,7 @@ export const createCart = async newCart => {
 	});
 
 	await cartGenerated.save();
-	return {
-		status: 'OK',
-		message: `Carrito generado`,
-		data: cartGenerated,
-	};
+	return cartGenerated;
 };
 
 export const getAllCarts = async (limit = 10, since = 0) => {
@@ -35,11 +31,6 @@ export const deletCart = async cartId => {
 			status: 'Error',
 			message: `El Id: ${cartId} no fue encontrado`,
 		};
-
-	return {
-		status: 'OK',
-		message: `El carrito con Id: ${cartId} fue eliminado`,
-	};
 };
 
 export const cartProductById = async cartId => {
