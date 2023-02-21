@@ -31,11 +31,6 @@ export const deletCart = async cartId => {
 			status: 'Error',
 			message: `El Id: ${cartId} no fue encontrado`,
 		};
-
-	return {
-		status: 'OK',
-		message: `El carrito con Id: ${cartId} fue eliminado`,
-	};
 };
 
 export const cartProductById = async cartId => {
