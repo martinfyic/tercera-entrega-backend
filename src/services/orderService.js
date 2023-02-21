@@ -1,4 +1,5 @@
 import * as Orders from '../daos/orders/OrdersDAOMongo.js';
+import * as Carts from '../daos/carts/CartsDAOMongo.js';
 import { transporter } from '../config/nodemailer.js';
 import { cartsModel } from '../schemas/index.js';
 
@@ -49,5 +50,6 @@ export const createNewOrder = async (idCart, user) => {
 			`,
 	});
 
+	await Carts.deletCart(idCart);
 	return savedOrder;
 };
