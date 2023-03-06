@@ -1,3 +1,4 @@
+import { productFormatSchemaDTO } from '../../dto/Product/ProductsDTO.js';
 import { productsModel } from '../../schemas/index.js';
 
 export const getAllProducts = async (limit = 10, since = 0) => {
@@ -22,22 +23,16 @@ export const getProductById = async prodId => {
 	return productById;
 };
 
-export const createNewProduct = async newProduct => {
+export const createNewProduct = async (body, thumbnail) => {
 	let isAlreadyAdded = await productsModel
-		.findOne({ title: newProduct.title })
+		.findOne({ title: body.title })
 		.exec();
 	if (isAlreadyAdded !== null)
 		return {
-			message: `Producto con nombre ${newProduct.title} ya creado`,
+			message: `Producto con nombre ${body.title} ya creado`,
 		};
 
-	const saveNewProduct = new productsModel({
-		title: newProduct.title,
-		price: newProduct.price,
-		thumbnail: newProduct.thumbnail,
-		description: newProduct.description,
-		stock: newProduct.stock,
-	});
+	const saveNewProduct = productFormatSchemaDTO(body, thumbnail);
 
 	await saveNewProduct.save();
 	return {
