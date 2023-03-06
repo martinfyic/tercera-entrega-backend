@@ -1,36 +1,55 @@
 import * as Cart from '../daos/carts/CartsDAOMongo.js';
+import { logger } from '../config/index.js';
 
 export const createCart = async user => {
-	const newCart = {
-		products: [],
-		firstName: user.name.first,
-		lastName: user.name.last,
-		userId: user._id.toString(),
-	};
-	const cartGenerated = await Cart.createCart(newCart);
-	return cartGenerated;
+	try {
+		const cartGenerated = await Cart.createCart(user);
+		return cartGenerated;
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const getAllCarts = async (limit, since) => {
-	const allCarts = await Cart.getAllCarts(limit, since);
-	return allCarts;
+	try {
+		const allCarts = await Cart.getAllCarts(limit, since);
+		return allCarts;
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const deletCart = async cartId => {
-	await Cart.deletCart(cartId);
+	try {
+		await Cart.deletCart(cartId);
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const cartProductById = async cartId => {
-	const productInCart = await Cart.cartProductById(cartId);
-	return productInCart;
+	try {
+		const productInCart = await Cart.cartProductById(cartId);
+		return productInCart;
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const addProductToCart = async (cartId, prodId) => {
-	const prodSelectedById = await Cart.searchProd(prodId);
-	await Cart.addProductToCart(cartId, prodSelectedById);
+	try {
+		const prodSelectedById = await Cart.searchProd(prodId);
+		await Cart.addProductToCart(cartId, prodSelectedById);
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const deleteProductInCart = async (cartId, prodId) => {
-	const prodDeleted = await Cart.deleteProductInCart(cartId, prodId);
-	return prodDeleted;
+	try {
+		const prodDeleted = await Cart.deleteProductInCart(cartId, prodId);
+		return prodDeleted;
+	} catch (error) {
+		logger.error(error);
+	}
 };
