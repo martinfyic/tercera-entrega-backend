@@ -10,8 +10,8 @@ export const getProductById = async prodId => {
 	return productById;
 };
 
-export const createNewProduct = async newProduct => {
-	const savedProduct = await Products.createNewProduct(newProduct);
+export const createNewProduct = async (body, thumbnail) => {
+	const savedProduct = await Products.createNewProduct(body, thumbnail);
 	return savedProduct;
 };
 

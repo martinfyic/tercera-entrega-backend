@@ -13,12 +13,14 @@ v1ProdRouter
 	})
 	.post(
 		'/',
-		check('_id', 'El ID no es valido').isMongoId(),
-		check('title', 'El titulo es obligatorio').not().isEmpty(),
-		check('price', 'El precio es obligatorio').not().isEmpty(),
-		check('thumbnail', 'Thumbnail es obligatorio').not().isEmpty(),
-		check('stock', 'Thumbnail es obligatorio').not().isEmpty(),
-		[productsUpload.single('thumbnail')],
+		[
+			check('_id', 'El ID no es valido').isMongoId(),
+			check('title', 'El titulo es obligatorio').not().isEmpty(),
+			check('price', 'El precio es obligatorio').not().isEmpty(),
+			check('thumbnail', 'Thumbnail es obligatorio').not().isEmpty(),
+			check('stock', 'Thumbnail es obligatorio').not().isEmpty(),
+			productsUpload.single('thumbnail'),
+		],
 		productController.createNewProduct
 	)
 	.put('/id/:prodId', productController.upDateOneProduct)

@@ -1,5 +1,7 @@
+import { userFormatSchemaDTO } from '../../dto/User/UsersDTO.js';
 import { userModel, cartsModel } from '../../schemas/index.js';
 import { createCart } from '../../services/cartService.js';
+import { logger } from '../../config/index.js';
 
 export const getAllUsers = async (limit = 10, since = 0) => {
 	try {
@@ -15,7 +17,7 @@ export const getAllUsers = async (limit = 10, since = 0) => {
 			allUsers,
 		};
 	} catch (error) {
-		throw error;
+		logger.error(error);
 	}
 };
 
@@ -24,55 +26,44 @@ export const getUserById = async id => {
 		const user = await userModel.findById(id).exec();
 		return user;
 	} catch (error) {
-		throw error;
+		logger.error(error);
 	}
 };
 
-export const createNewUser = async newUser => {
+export const createNewUser = async (body, avatar) => {
 	try {
 		const isAlreadyAdded = await userModel
-			.findOne({ email: newUser.email })
+			.findOne({ email: body.email })
 			.exec();
 		if (isAlreadyAdded !== null)
 			return {
-				message: `El email ${newUser.email} ya esta registrado`,
+				message: `El email ${body.email} ya esta registrado`,
 			};
 
-		const saveNewUser = new userModel({
-			name: {
-				first: newUser.name.first,
-				last: newUser.name.last,
-			},
-			email: newUser.email,
-			password: newUser.password,
-			avatar: newUser.avatar,
-			phone: newUser.phone,
-			address: {
-				street: newUser.address.street,
-				streetNum: newUser.address.streetNum,
-				departmentNum: newUser.address.departmentNum,
-			},
-			age: newUser.age,
-		});
+		const saveNewuser = userFormatSchemaDTO(body, avatar);
 
-		await saveNewUser.save();
+		await saveNewuser.save();
 		return {
 			message: 'Usuario registrado en DB',
-			data: saveNewUser,
+			data: saveNewuser,
 		};
 	} catch (error) {
-		throw error;
+		logger.error(error);
 	}
 };
 
 export const createUserCart = async user => {
-	const cartUser = await cartsModel
-		.findOne({ userId: user._id.toString() })
-		.lean()
-		.exec();
+	try {
+		const cartUser = await cartsModel
+			.findOne({ userId: user._id })
+			.lean()
+			.exec();
 
-	if (cartUser) return cartUser;
+		if (cartUser) return cartUser;
 
-	const newCartUser = await createCart(user);
-	return newCartUser;
+		const newCartUser = await createCart(user);
+		return newCartUser;
+	} catch (error) {
+		logger.error(error);
+	}
 };
