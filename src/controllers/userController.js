@@ -1,17 +1,26 @@
 import * as userService from '../services/userService.js';
+import { logger } from '../config/index.js';
 
 export const getAllUsers = async (req, res) => {
-	const { limit, since } = req.query;
+	try {
+		const { limit, since } = req.query;
 
-	const allUsers = await userService.getAllUsers(limit, since);
-	return res.status(200).send({ status: 'OK', data: allUsers });
+		const allUsers = await userService.getAllUsers(limit, since);
+		return res.status(200).send({ status: 'OK', data: allUsers });
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const getUserById = async (req, res) => {
-	const { id } = req.params;
+	try {
+		const { id } = req.params;
 
-	const userById = await userService.getUserById(id);
-	return res.status(200).send({ status: 'OK', data: userById });
+		const userById = await userService.getUserById(id);
+		return res.status(200).send({ status: 'OK', data: userById });
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const createNewUser = async (req, res) => {
@@ -24,38 +33,58 @@ export const createNewUser = async (req, res) => {
 
 		res.redirect('/users/login');
 	} catch (error) {
-		console.log(error);
+		logger.error(error);
 	}
 };
 
 export const singUpUser = (req, res) => {
-	if (req.isAuthenticated()) return res.redirect('/users/menu');
-	res.render('signup', { title: '⚡ Signup' });
+	try {
+		if (req.isAuthenticated()) return res.redirect('/users/menu');
+		res.render('signup', { title: '⚡ Signup' });
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const loginUser = (req, res) => {
-	if (req.isAuthenticated()) return res.redirect('/users/menu');
-	res.render('login', { title: '⚡ Login' });
+	try {
+		if (req.isAuthenticated()) return res.redirect('/users/menu');
+		res.render('login', { title: '⚡ Login' });
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const userMenu = async (req, res) => {
-	const user = req.user;
-	const userCart = await userService.createUserCart(user);
-	res.status(200).render('userMenu', {
-		title: '⚡ User Menu',
-		user,
-		userCart,
-	});
+	try {
+		const user = req.user;
+		const userCart = await userService.createUserCart(user);
+		res.status(200).render('userMenu', {
+			title: '⚡ User Menu',
+			user,
+			userCart,
+		});
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const userLogOut = (req, res) => {
-	req.logout(err => {
-		if (err) return err;
-		res.redirect('/users/login');
-	});
+	try {
+		req.logout(err => {
+			if (err) return err;
+			res.redirect('/users/login');
+		});
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const loginError = (req, res) => {
-	if (req.isAuthenticated()) return res.redirect('/users/menu');
-	res.render('error-login', { title: '⚠️ Error en login' });
+	try {
+		if (req.isAuthenticated()) return res.redirect('/users/menu');
+		res.render('error-login', { title: '⚠️ Error en login' });
+	} catch (error) {
+		logger.error(error);
+	}
 };
