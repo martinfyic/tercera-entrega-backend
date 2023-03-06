@@ -27,15 +27,8 @@ export const getProductById = async (req, res) => {
 
 export const createNewProduct = async (req, res) => {
 	const { body } = req;
-	const thumbnail = req.file ? req.file.filename : '';
-
-	const newProduct = {
-		title: body.title,
-		price: body.price,
-		thumbnail: `${req.protocol}://${req.get('host')}/image/${thumbnail}`,
-		description: body.description,
-		stock: body.stock,
-	};
+	const prodImg = req.file ? req.file.filename : '';
+	const thumbnail = `${req.protocol}://${req.get('host')}/image/${prodImg}`;
 
 	if (
 		!body.title ||
@@ -47,10 +40,9 @@ export const createNewProduct = async (req, res) => {
 		res.status(400).send({
 			status: 'Bad Request',
 			message: 'Falta informacion verifique',
-			data: newProduct,
 		});
 	} else {
-		await productService.createNewProduct(newProduct);
+		await productService.createNewProduct(body, thumbnail);
 		res.status(201).redirect('/api/v1/productos/carga');
 	}
 };
