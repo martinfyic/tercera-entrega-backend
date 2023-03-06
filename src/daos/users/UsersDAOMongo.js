@@ -55,7 +55,7 @@ export const createNewUser = async (body, avatar) => {
 export const createUserCart = async user => {
 	try {
 		const cartUser = await cartsModel
-			.findOne({ userId: user._id.toString() })
+			.findOne({ userId: user._id })
 			.lean()
 			.exec();
 
