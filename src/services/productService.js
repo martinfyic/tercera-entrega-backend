@@ -1,26 +1,47 @@
 import * as Products from '../daos/products/ProductsDAOMongo.js';
+import { logger } from '../config/index.js';
 
 export const getAllProducts = async (limit, since) => {
-	const allProducts = await Products.getAllProducts(limit, since);
-	return allProducts;
+	try {
+		const allProducts = await Products.getAllProducts(limit, since);
+		return allProducts;
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const getProductById = async prodId => {
-	const productById = await Products.getProductById(prodId);
-	return productById;
+	try {
+		const productById = await Products.getProductById(prodId);
+		return productById;
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const createNewProduct = async (body, thumbnail) => {
-	const savedProduct = await Products.createNewProduct(body, thumbnail);
-	return savedProduct;
+	try {
+		const savedProduct = await Products.createNewProduct(body, thumbnail);
+		return savedProduct;
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const upDateOneProduct = (prodId, bodyUpdate) => {
-	const upDatedProduct = Products.upDatedProduct(prodId, bodyUpdate);
-	return upDatedProduct;
+	try {
+		const upDatedProduct = Products.upDatedProduct(prodId, bodyUpdate);
+		return upDatedProduct;
+	} catch (error) {
+		logger.error(error);
+	}
 };
 
 export const deleteOneProduct = async prodId => {
-	const prodDeleted = await Products.deleteOneProduct(prodId);
-	return prodDeleted;
+	try {
+		const prodDeleted = await Products.deleteOneProduct(prodId);
+		return prodDeleted;
+	} catch (error) {
+		logger.error(error);
+	}
 };
