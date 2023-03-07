@@ -30,7 +30,7 @@ export const createNewOrder = async (idCart, user) => {
 		const newOrder = ordersFormatSchemaDTO(user, cartById);
 
 		await newOrder.save();
-		const seeNewOrder = await ordersModel.findOne({ userId: user.name._id });
+		const seeNewOrder = await ordersModel.findOne({ cartId: cartById._id });
 		return seeNewOrder;
 	} catch (error) {
 		logger.error(error);
