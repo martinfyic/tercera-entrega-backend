@@ -8,6 +8,7 @@ const ordersSchema = mongoos.Schema(
 			lastName: { type: String, required: true },
 		},
 		userId: { type: String, required: true },
+		cartId: { type: String, required: true },
 		address: {
 			street: { type: String, required: true },
 			streetNum: { type: Number, required: true },
