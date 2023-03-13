@@ -12,6 +12,7 @@ import {
 	v1UserRouter,
 } from './routes/v1/index.js';
 import { error404, strategyLogin, isAuth } from './middleware/index.js';
+import * as AxiosTest from './test/axios.js';
 
 const PORT = process.env.PORT || 8080;
 
@@ -47,7 +48,8 @@ app
 	.set('views', 'public')
 	.use('/', v1LandRouter)
 	.use('/users', v1UserRouter)
-	.use('/api/v1/productos', isAuth, v1ProdRouter)
+	// .use('/api/v1/productos', isAuth, v1ProdRouter)
+	.use('/api/v1/productos', v1ProdRouter)
 	.use('/api/v1/carrito', isAuth, v1CartRouter)
 	.use('/api/v1/ordenes', isAuth, v1OrderRouter)
 	.use(error404);
@@ -65,3 +67,18 @@ const connection = async () => {
 };
 
 connection();
+
+// --> TEST AXIOS
+// const body = {
+// 	title: 'testAxios',
+// 	price: 2500,
+// 	description: 'test Description',
+// 	stock: 3,
+// };
+// const thumbnail = 'test.png';
+// await AxiosTest.getAllProdAxios();
+// await AxiosTest.getProdByIdAxios('6406759bc3bb848e569e9759');
+// await AxiosTest.createNewProdAxios(body);
+// await AxiosTest.upDateOneProductAxios(body, prodId);
+// await AxiosTest.upDateOneProductAxios(body, prodId);
+// await AxiosTest.deleteOneProductAxios('640e86e71b7dbed25cd95890');
