@@ -6,6 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "nodemon src/app.js",
+		"test": "mocha src/test/app.test.js",
 		"start": "node src/app.js"
 	},
 	"keywords": [],
@@ -26,9 +27,12 @@
 		"passport": "0.6.0",
 		"passport-local": "1.0.0",
 		"twilio": "4.7.2",
-		"winston": "^3.8.2"
+		"winston": "3.8.2"
 	},
 	"devDependencies": {
+		"chai": "4.3.7",
+		"chai-http": "4.3.0",
+		"mocha": "10.2.0",
 		"nodemon": "2.0.20"
 	}
 }
